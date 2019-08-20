@@ -9,11 +9,14 @@ interface Styles {
 export default StyleSheet.create<Styles>({
   container: {
     flex: 1,
+    backgroundColor: '#ecf0f1',
   },
   list: {
     flex: 1,
+    marginHorizontal: 30,
   },
   listRow: {
     flex: 1,
+    marginVertical: 15,
   }
 });
