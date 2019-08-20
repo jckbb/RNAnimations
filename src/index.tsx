@@ -2,12 +2,21 @@ import React from 'react';
 import { View, SafeAreaView, ScrollView } from 'react-native';
 import styles from './styles';
 import { InitialProps } from 'expo/build/launch/withExpoRoot.types';
+import ButtonOne from './components/ButtonOne';
 
-class App extends React.Component<InitialProps> {
+interface State {
+  maxListWidth: number,
+};
+
+class App extends React.Component<InitialProps, State> {
   constructor(props: InitialProps) {
     super(props);
 
     this.renderRow = this.renderRow.bind(this);
+
+    this.state = {
+      maxListWidth: 0,
+    };
   }
 
   renderRow(children) {
@@ -19,10 +28,12 @@ class App extends React.Component<InitialProps> {
   }
 
   render() {
+    const { maxListWidth } = this.state;
+
     return(
       <SafeAreaView style={styles.container}>
-        <ScrollView style={styles.list}>
-          {this.renderRow(<View />)}
+        <ScrollView onLayout={e => { this.setState({ maxListWidth: e.nativeEvent.layout.width }); }} style={styles.list}>
+          {this.renderRow(<ButtonOne maxWidth={maxListWidth} >{'Cream'}</ButtonOne>)}
         </ScrollView>
       </SafeAreaView>
     );
